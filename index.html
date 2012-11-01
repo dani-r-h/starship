@@ -1,9 +1,79 @@
+<!-- Copyright 2012 Daniel Rodriguez Hernandez 
+
+This file is part of StarShip.
+
+    StarShip is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    StarShip is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with StarShip.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	</head>
-	<body>
-		<iframe id="gameframe" width="615" height="350" src="game/game.html"></iframe>
-	</body>
+<head>
+<title>Starship</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="description"
+	content="Game created by Daniel Rodriguez on CraftyJS. Nov-2012">
+<link rel="icon" type="image/ico" href="game/images/favicon.ico"></link>
+<link rel="stylesheet" type="text/css" href="game/css/game.css"></link>
+<script type="text/javascript" src="game/lib/jquery-1.8.2-min.js"></script>
+<script type="text/javascript" src="game/lib/crafty.js"></script>
+<script type="text/javascript" src="game/js/sprites.js"></script>
+<script type="text/javascript" src="game/js/gameOver.js"></script>
+<script type="text/javascript" src="game/js/shoot.js"></script>
+<script type="text/javascript" src="game/js/enemy.js"></script>
+<script type="text/javascript" src="game/js/ship.js"></script>
+<script type="text/javascript" src="game/js/gameLoop.js"></script>
+<script type="text/javascript" src="game/js/gameScene.js"></script>
+<script type="text/javascript" src="game/js/game.js"></script>
+
+</head>
+<body>
+	<div id="titleContainer">
+		<div id="title">Starship</div>
+		<div id="author">Daniel Rodriguez</div>
+		<div id="code">
+			Code: <a href="https://github.com/dani-r-h/starship" target="_blank">Starship
+				Source Code</a>
+		</div>
+		<div id="version">Version: 0.0.2</div>
+	</div>
+	<div id="mainContainer" class="mainContainer">
+		<div id="leftDiv" class="leftDiv">
+			<div id="enemyTitle">Enemies</div>
+			<div class="leftRow">
+				<div id="violetEnemy"></div>
+				<div class="points">30 points</div>
+			</div>
+			<div class="leftRow">
+				<div id="blackEnemy"></div>
+				<div class="points">10 points</div>
+			</div>
+
+		</div>
+		<div id="cr-stage" class="gameDiv">
+			<div id="interface" class="gameInterface">
+				<div class="score"></div>
+				<div class="lifes"></div>
+				<div style="clear: both"></div>
+			</div>
+		</div>
+		<div id="rightDiv" class="rightDiv"></div>
+	</div>
+	<div id="debugCoords" class="debugCoords"></div>
+	<div style="clear: both"></div>
+	<div id="footer">
+		<a href="http://linkedin.com/in/danielrodriguezhernandez"
+			target="_blank">Starship (C) 2012 - Daniel Rodriguez</a>
+	</div>
+</body>
 </html>
