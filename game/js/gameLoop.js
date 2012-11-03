@@ -21,6 +21,7 @@ Crafty.c("GameLoop", {
 		GAME_STATUS.GAME_OVER = false;
 		var ship = Crafty.e("Ship");
 		var points = Crafty.e("Points");
+		this.requires("Keyboard");
 		this.bind("EnterFrame", function(frame) {
 			if (launchEnemy(frame.frame, Crafty("Enemy").length)) {
 				Crafty.e("Enemy");
@@ -30,6 +31,16 @@ Crafty.c("GameLoop", {
 				Crafty.e("SmartEnemy");
 			}
 
+		});
+
+		this.bind('KeyDown', function() {
+			if (this.isDown('V')) {
+				if (SOUNDS.active == true) {
+					Crafty.trigger("SwitchOffSounds");
+				} else if (SOUNDS.active == false) {
+					Crafty.trigger("SwitchOnSounds");
+				}
+			}
 		});
 	},
 

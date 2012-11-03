@@ -18,16 +18,16 @@ This file is part of StarShip.
 
 Crafty.c("Enemy", {
 	armor : 0,
+	ship : "enemy",
 	init : function() {
 		this.armor = CONSTANTS.ENEMY_LIFE;
-		this.requires("2D,DOM,Color,Collision");
-		this.color(COLOURS.BLACK);
+		this.requires("2D,Canvas," + this.ship + ",Collision");
 		this.attr({
 			x : Crafty.math.randomInt(CONSTANTS.LEFT_LIMIT_LAUNCH_ENEMIES,
 					CONSTANTS.RIGHT_LIMIT_LAUNCH_ENEMIES),
 			y : 0,
-			w : 15,
-			h : 15,
+			w : 23,
+			h : 22,
 			dX : 0,
 			dY : CONSTANTS.ENEMY_SPEED
 		});
@@ -81,16 +81,16 @@ Crafty.c("Enemy", {
 
 Crafty.c("SmartEnemy", {
 	armor : 0,
+	ship : "smartEnemy",
 	init : function() {
 		this.armor = CONSTANTS.SMART_ENEMY_LIFE;
-		this.requires("2D,DOM,Color,Collision");
-		this.color(COLOURS.VIOLET);
+		this.requires("2D,Canvas," + this.ship + ",Collision");
 		this.attr({
 			x : Crafty.math.randomInt(CONSTANTS.LEFT_LIMIT_LAUNCH_ENEMIES,
 					CONSTANTS.RIGHT_LIMIT_LAUNCH_ENEMIES),
 			y : 0,
-			w : 25,
-			h : 25,
+			w : 49,
+			h : 63,
 			dX : 0,
 			dY : CONSTANTS.SMART_ENEMY_SPEED
 		});

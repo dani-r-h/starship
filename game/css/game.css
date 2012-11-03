@@ -18,12 +18,13 @@ This file is part of StarShip.
 .mainContainer { /*border: 1px solid #000000;*/
 	float: left;
 	height: 600px;
-	margin-left: 250px;
+	margin-left: 150px;
+	text-align: center;
 	width: 1000px;
 }
 
 .gameDiv {
-	border: 1px solid #ff0000;
+	border: 1px solid #FF0000;
 	margin-left: 200px;
 }
 
@@ -33,6 +34,7 @@ This file is part of StarShip.
 	font-family: Verdana;
 	font-size: 15px;
 	float: left;
+	color: #ffffff;
 }
 
 .score {
@@ -61,36 +63,38 @@ This file is part of StarShip.
 
 .leftRow {
 	padding: 20px;
-	margin-top: 10px;
 }
 
 #blackEnemy {
-	border: 1px solid #000000;
-	background-color: #000000;
-	width: 15px;
-	height: 15px;
 	float: left;
-	width: 15px;
+	height: 21px;
+	width: 25px
 }
 
 #violetEnemy {
-	border: 1px solid #4F2F4F;
-	background-color: #4F2F4F;
-	width: 25px;
-	height: 25px;
 	float: left;
+	height: 70px;
+	width: 45px;
 }
 
-.points {
+.smartEnemyPoints {
 	float: left;
 	font-family: Verdana;
 	font-size: 15px;
 	margin-left: 15px;
+	margin-top: 10px;
+}
+
+.enemyPoints {
+	float: left;
+	font-family: Verdana;
+	font-size: 15px;
+	margin-left: 33px;
 }
 
 #titleContainer { /*border: 1px solid #000000;*/
 	height: 100px;
-	margin-left: 590px;
+	margin-left: 485px;
 	width: 300px;
 }
 
@@ -119,21 +123,68 @@ This file is part of StarShip.
 	font-family: Verdana;
 }
 
-#enemyTitle {
+.leftTitle {
 	font-size: 22px;
 	font-family: Verdana;
 	text-align: center;
+	font-weight: bold;
 }
 
-#footer{
+#footer {
 	color: #979797;
-    font-family: Verdana;
-    font-size: 9px;
-    padding: 10px;
-    text-align: center;
+	font-family: Verdana;
+	font-size: 9px;
+	padding: 10px;
+	text-align: center;
 }
 
-#footer a{
-	text-decoration:none;
+#footer a {
+	text-decoration: none;
 	color: #979797;
+}
+
+#rightDiv {
+	float: right;
+	margin-top: 14px;
+	text-align: center;
+	width: 144px;
+}
+
+#soundContainer {
+	font-family: Verdana;
+	font-size: 16px;
+	width: 158px;
+}
+
+#soundTitle {
+	float: left;
+	font-size: 22px;
+	font-weight: bold;
+	padding: 5px;
+}
+
+#soundOnOff {
+	float: right;
+	padding: 10px;
+}
+
+.control {
+	font-family: Verdana;
+	font-size: 16px;
+	padding: 4px;
+	text-align: start;
+	margin-left: 17px;
+	text-decoration: underline;
+}
+
+.controlKey {
+	font-family: Verdana;
+	font-size: 12px;
+	margin-left: 28px;
+	padding: 2px 5px 5px;
+	text-align: start;
+}
+
+#enemyContainer {
+	margin-top: 25px;
 }

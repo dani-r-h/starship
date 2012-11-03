@@ -26,8 +26,8 @@ Crafty.c("Ship", {
 		this.attr({
 			x : CONSTANTS.WIDTH / 2,
 			y : CONSTANTS.HEIGHT - 30,
-			w : 17,
-			h : 17
+			w : 37,
+			h : 35
 		});
 
 		this.multiway(this.shipSpeed, {
@@ -53,7 +53,7 @@ Crafty.c("Ship", {
 				this.y = 0;
 
 			} else if (this.x + this.w > CONSTANTS.WIDTH && this.y < 0) {
-				this.x = width - this.w;
+				this.x = CONSTANTS.WIDTH - this.w;
 				this.y = 0;
 
 			} else if (this.x < 0 && this.y > CONSTANTS.HEIGHT - this.h) {
@@ -81,7 +81,7 @@ Crafty.c("Ship", {
 
 			}
 
-			if (frame.frame % 8 == 0 && this.isDown('SPACE')) {
+			if (frame.frame % 30 == 0 && this.isDown('SPACE')) {
 				Crafty.e("Shoot").shoot(this.x + this.w / 2, this.y, 8,
 						DIRECTIONS.GO_UP, "#ff0000");
 			}
@@ -97,7 +97,7 @@ Crafty.c("Ship", {
 				Crafty.trigger("KillLife");
 			}
 		});
-		
+
 		this.onHit("ShootSmartEnemy", function() {
 			var arrayColliding = this.hit("ShootSmartEnemy");
 			for ( var i = 0; i < arrayColliding.length; i++) {
