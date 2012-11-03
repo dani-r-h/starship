@@ -14,9 +14,39 @@ This file is part of StarShip.
 
     You should have received a copy of the GNU General Public License
     along with StarShip.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+
+Crafty.scene("Loading", function() {
+	var toLoad = [];
+	toLoad.push(game_path + "game/images/bg.png");
+	toLoad.push(game_path + "game/images/enemy.png");
+	toLoad.push(game_path + "game/images/ship.png");
+	toLoad.push(game_path + "game/images/smartEnemy.png");
+	toLoad.push(game_path + "game/images/disparo1.png");
+	toLoad.push(game_path + "game/images/disparo2.png");
+	toLoad.push(game_path + "game/images/disparo3.png");
+
+	Crafty.load(toLoad, function() {
+		// Everything is loaded
+		Crafty.scene("GameScene");
+		Crafty.e("GameLoop");
+	}, function(e) {
+		// Update progress
+	}, function(e) {
+		// uh oh, error loading
+	});
+
+});
 
 Crafty.scene("GameScene", function() {
+	Crafty.background("url(" + game_path + "/game/images/bg.png)");
+
+	Crafty.bind("EnterFrame", function(frame) {
+		// Setup Background position
+		Crafty.stage.elem.style.backgroundPosition = "0px " + frame.frame
+				* (0.5) + "px";
+	});
+
 	Crafty.bind("UpdateScore", function(color) {
 		interfaz.score.text("Score: " + interfaz.playerScore);
 		if (color != null) {
@@ -62,8 +92,8 @@ Crafty.scene("GameScene", function() {
 	Crafty.bind("RebootGame", function() {
 		Crafty("GameLoop").reboot();
 	});
-	
-	Crafty.bind("DestroyElements",function(){
+
+	Crafty.bind("DestroyElements", function() {
 		Crafty("GameOver").destroy();
 		Crafty("Enemy").destroy();
 		Crafty("SmartEnemy").destroy();
@@ -71,7 +101,25 @@ Crafty.scene("GameScene", function() {
 		Crafty("ShootSmartEnemy").destroy();
 	});
 
+	Crafty.bind("PlaySound", function(soundName) {
+		Crafty.audio.play(soundName, 1, 0.8);
+	});
+
+	Crafty.bind("SwitchOnSounds", function() {
+		SOUNDS.active = true;
+		interfaz.soundsOnOff.text("On");
+		SOUNDS.obj = Crafty.audio.play("ambiente", -1, 1);
+	});
+
+	Crafty.bind("SwitchOffSounds", function() {
+		SOUNDS.active = false;
+		interfaz.soundsOnOff.text("Off");
+		Crafty.audio.stop();
+
+	});
+
 	Crafty.trigger("UpdateScore");
 	Crafty.trigger("UpdateLifes");
 
+	Crafty.trigger("SwitchOnSounds");
 });

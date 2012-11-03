@@ -32,7 +32,7 @@ var CONSTANTS = {
 	MAX_SMART_ENEMIES : 3,
 
 	SMART_ENEMY_SPEED : 0.25,
-	ENEMY_SPEED : 1
+	ENEMY_SPEED : 1.5
 
 };
 
@@ -57,6 +57,7 @@ var COLOURS = {
 var interfaz = {
 	score : null,
 	lifes : null,
+	soundsOnOff : null,
 	playerScore : CONSTANTS.PLAYER_SCORE_INIT,
 	playerLifes : CONSTANTS.PLAYER_LIFES_INIT
 };
@@ -68,7 +69,7 @@ var DEBUG = {
 	DEBUG_SHOOT_ENEMIES : true,
 	DEBUG_SHOOT_SMART_ENEMIES : true,
 	MAX_ENEMIES_DEBUG : 0,
-	MAX_SMART_ENEMIES_DEBUG : 1,
+	MAX_SMART_ENEMIES_DEBUG : 0,
 	debugDiv : null,
 };
 
@@ -77,24 +78,35 @@ var PLAYER_SHIP = {
 	y : 0
 }
 
+var SOUNDS = {
+	active : false,
+	obj : null
+}
+
 function mustShootEnemy(frame) {
 	var shoot = false;
-	if (DEBUG.DEBUG_FLAG == true && DEBUG.DEBUG_SHOOT_ENEMIES == true) {
-		shoot = frame % 100 == 0;
-	} else {
-		shoot = Crafty.math.randomInt(0, 200) == 2;
+	if (GAME_STATUS.GAME_OVER == false) {
+		if (DEBUG.DEBUG_FLAG == true && DEBUG.DEBUG_SHOOT_ENEMIES == true) {
+			shoot = frame % 100 == 0;
+		} else {
+			shoot = Crafty.math.randomInt(0, 200) == 2;
+		}
 	}
 	return shoot;
 }
 
 function mustShootSmartEnemy(frame, shootX, shootY, playerX, playerY) {
 	var shoot = false;
-	if (playerY > shootY) {
-		if (DEBUG.DEBUG_FLAG == true && DEBUG.DEBUG_SHOOT_SMART_ENEMIES == true) {
-			shoot = frame % 50 == 0;
-		} else {
-			shoot = Crafty.math.randomInt(0, 100) == 2;
+	if (GAME_STATUS.GAME_OVER == false) {
+		if (playerY > shootY) {
+			if (DEBUG.DEBUG_FLAG == true
+					&& DEBUG.DEBUG_SHOOT_SMART_ENEMIES == true) {
+				shoot = frame % 50 == 0;
+			} else {
+				shoot = Crafty.math.randomInt(0, 100) == 2;
+			}
 		}
+
 	}
 	return shoot;
 }
@@ -127,9 +139,9 @@ function launchSmartEnemy(frame, numEnemy) {
 jQuery(document).ready(function() {
 	interfaz.score = jQuery(".score");
 	interfaz.lifes = jQuery(".lifes");
+	interfaz.soundsOnOff = jQuery("#soundOnOff");
 	DEBUG.debugDiv = jQuery("#debugCoords");
 	Crafty.init(CONSTANTS.WIDTH, CONSTANTS.HEIGHT);
 	Crafty.background('#858585');
-	Crafty.scene("GameScene");
-	Crafty.e("GameLoop");
+	Crafty.scene("Loading");
 });

@@ -14,8 +14,28 @@ This file is part of StarShip.
 
     You should have received a copy of the GNU General Public License
     along with StarShip.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
-Crafty.sprite("game/images/ship.png",{
-	playerShip:[0,0,20,17]
+Crafty.sprite(game_path + "game/images/ship.png", {
+	playerShip : [ 0, 0, 37, 35 ]
+});
+
+Crafty.sprite(game_path + "game/images/enemy.png", {
+	enemy : [ 0, 0, 23, 22 ]
+});
+
+Crafty.sprite(game_path + "game/images/smartEnemy.png", {
+	smartEnemy : [ 0, 0, 43, 69 ]
+});
+
+Crafty.sprite(game_path + "game/images/disparo1.png", {
+	disparo1 : [ 0, 0, 9, 16 ]
+});
+
+Crafty.sprite(game_path + "game/images/disparo2.png", {
+	disparo2 : [ 0, 0, 6, 11 ]
+});
+
+Crafty.sprite(game_path + "game/images/disparo3.png", {
+	disparo3 : [ 0, 0, 6, 11 ]
 });

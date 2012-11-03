@@ -17,16 +17,16 @@ This file is part of StarShip.
  */
 
 Crafty.c("Shoot", {
+	shootSprite : 'disparo2',
 	init : function() {
-		this.requires("2D,DOM,Color,Collision");
-		this.w = 4;
-		this.h = 5;
+		this.requires("2D,Canvas," + this.shootSprite + ",Collision");
+		this.w = 6;
+		this.h = 11;
 	},
 
 	shoot : function(x, y, speed, movement, colorHex, targetX, targetY) {
 		this.x = x;
 		this.y = y;
-		this.color(colorHex);
 		this.bind("EnterFrame", function() {
 			if (this.y <= 0) {
 				this.destroy();
@@ -36,29 +36,32 @@ Crafty.c("Shoot", {
 			/* Calculo de dX y dY para que persiga al player */
 			this.y = this.y + (movement * speed);
 		});
+
+		if (SOUNDS.active == true) {
+			Crafty.trigger("PlaySound", "laserNormal");
+		}
 	}
 
 });
 
 Crafty.c("ShootEnemy", {
+	shootSprite : 'disparo3',
 	init : function() {
-		this.requires("2D,DOM,Color,Collision");
-		this.w = 4;
-		this.h = 5;
-		this.onHit("Shoot", function() {
-			var arrayColliding = this.hit("Shoot");
-			for ( var i = 0; i < arrayColliding.length; i++) {
-				arrayColliding[i].obj.destroy();
-			}
-			this.destroy();
-
-		});
+		this.requires("2D,Canvas," + this.shootSprite + ",Collision");
+		this.w = 6;
+		this.h = 11;
+		/*
+		 * this.onHit("Shoot", function() { var arrayColliding =
+		 * this.hit("Shoot"); for ( var i = 0; i < arrayColliding.length; i++) {
+		 * arrayColliding[i].obj.destroy(); } this.destroy();
+		 * 
+		 * });
+		 */
 	},
 
 	shoot : function(x, y, speed, movement, colorHex, targetX, targetY) {
 		this.x = x;
 		this.y = y;
-		this.color(colorHex);
 		this.bind("EnterFrame", function() {
 			if (this.y <= 0) {
 				this.destroy();
@@ -68,23 +71,25 @@ Crafty.c("ShootEnemy", {
 			/* Calculo de dX y dY para que persiga al player */
 			this.y = this.y + (movement * speed);
 		});
+		if (SOUNDS.active == true) {
+			Crafty.audio.play("laserNormal", 1, 0.8);
+		}
 	}
 
 });
 
 Crafty.c("ShootSmartEnemy", {
+	shootSprite : 'disparo1',
 	init : function() {
-		this.requires("2D,DOM,Color,Collision");
-		this.w = 5;
-		this.h = 6;
+		this.requires("2D,Canvas," + this.shootSprite + ",Collision");
+		this.w = 9;
+		this.h = 16;
 
-		this.onHit("Shoot", function() {
-			var arrayColliding = this.hit("Shoot");
-			for ( var i = 0; i < arrayColliding.length; i++) {
-				arrayColliding[i].obj.destroy();
-			}
-			this.destroy();
-		});
+		/*
+		 * this.onHit("Shoot", function() { var arrayColliding =
+		 * this.hit("Shoot"); for ( var i = 0; i < arrayColliding.length; i++) {
+		 * arrayColliding[i].obj.destroy(); } this.destroy(); });
+		 */
 	},
 
 	shoot : function(x, y, speed, movement, colorHex, targetX, targetY) {
@@ -97,12 +102,12 @@ Crafty.c("ShootSmartEnemy", {
 		this.diffX = this.targetX - this.x /* Vector en X */
 		this.diffY = this.targetY - this.y /* Vector en Y */
 
-		this.color(colorHex);
 		this.bind("EnterFrame", function() {
-			/*var string = '<div class="debugRow">X: ' + this.x + '</div>';
-			DEBUG.debugDiv.append(string);*/
+			/*
+			 * var string = '<div class="debugRow">X: ' + this.x + '</div>';
+			 * DEBUG.debugDiv.append(string);
+			 */
 
-			
 			/*
 			 * Vector de la longitud que tiene que recorrer el disparo para
 			 * alcanzar al objetivo
@@ -131,5 +136,9 @@ Crafty.c("ShootSmartEnemy", {
 			}
 
 		});
+
+		if (SOUNDS.active == true) {
+			Crafty.audio.play("laserBig", 1, 0.8);
+		}
 	}
 });
