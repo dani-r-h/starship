@@ -17,8 +17,8 @@ This file is part of StarShip.
  */
 
 Crafty.audio.add({
-	laserBig : [ game_path + "game/audio/sounds/disparoGrande.ogg",
-			game_path + "game/audio/sounds/disparoGrande.mp3",
+	laserBig : [ game_path + "game/audio/sounds/disparoGrande.mp3",
+			game_path + "game/audio/sounds/disparoGrande.ogg",
 			game_path + "game/audio/sounds/disparoGrande.wav" ],
 	laserNormal : [ game_path + "game/audio/sounds/disparo.ogg",
 			game_path + "game/audio/sounds/disparo.mp3",
