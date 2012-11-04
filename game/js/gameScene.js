@@ -102,13 +102,13 @@ Crafty.scene("GameScene", function() {
 	});
 
 	Crafty.bind("PlaySound", function(soundName) {
-		Crafty.audio.play(soundName, 1, 0.8);
+		Crafty.audio.play(soundName, 1, 0.3);
 	});
 
 	Crafty.bind("SwitchOnSounds", function() {
 		SOUNDS.active = true;
 		interfaz.soundsOnOff.text("On");
-		SOUNDS.obj = Crafty.audio.play("ambiente", -1, 1);
+		SOUNDS.obj = Crafty.audio.play("ambiente", -1, 0.8);
 	});
 
 	Crafty.bind("SwitchOffSounds", function() {

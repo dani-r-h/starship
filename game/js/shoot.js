@@ -72,7 +72,7 @@ Crafty.c("ShootEnemy", {
 			this.y = this.y + (movement * speed);
 		});
 		if (SOUNDS.active == true) {
-			Crafty.audio.play("laserNormal", 1, 0.8);
+			Crafty.trigger("PlaySound", "laserNormal");
 		}
 	}
 
@@ -138,7 +138,7 @@ Crafty.c("ShootSmartEnemy", {
 		});
 
 		if (SOUNDS.active == true) {
-			Crafty.audio.play("laserBig", 1, 0.8);
+			Crafty.trigger("PlaySound", "laserBig");
 		}
 	}
 });
