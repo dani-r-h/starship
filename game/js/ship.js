@@ -18,6 +18,7 @@ This file is part of StarShip.
 
 Crafty.c("Ship", {
 	shipSpeed : 5,
+	shootType : '',
 	ship : "playerShip",
 	init : function() {
 		this
@@ -30,6 +31,7 @@ Crafty.c("Ship", {
 			h : 35
 		});
 
+		this.shootType = SHOOT_TYPE.SIMPLE;
 		this.multiway(this.shipSpeed, {
 			LEFT_ARROW : 180,
 			RIGHT_ARROW : 0,
@@ -38,8 +40,13 @@ Crafty.c("Ship", {
 		});
 		this.bind('KeyDown', function() {
 			if (this.isDown('SPACE')) {
-				Crafty.e("Shoot").shoot(this.x + this.w / 2, this.y, 8,
-						DIRECTIONS.GO_UP, COLOURS.RED);
+				var data = {
+					shootType : this.shootType,
+					coordX : this.x,
+					width : this.w,
+					coordY : this.y
+				};
+				Crafty.trigger("PlayerShoot", data);
 			}
 		});
 
@@ -82,8 +89,13 @@ Crafty.c("Ship", {
 			}
 
 			if (frame.frame % 30 == 0 && this.isDown('SPACE')) {
-				Crafty.e("Shoot").shoot(this.x + this.w / 2, this.y, 8,
-						DIRECTIONS.GO_UP, "#ff0000");
+				var data = {
+					shootType : this.shootType,
+					coordX : this.x,
+					width : this.w,
+					coordY : this.y
+				};
+				Crafty.trigger("PlayerShoot", data);
 			}
 
 		});
@@ -106,6 +118,15 @@ Crafty.c("Ship", {
 			if (DEBUG.DEBUG_FLAG != true) {
 				Crafty.trigger("KillLife");
 			}
+		});
+
+		this.onHit("PowerUpDoubleShoot", function() {
+			var arrayColliding = this.hit("PowerUpDoubleShoot");
+			for ( var i = 0; i < arrayColliding.length; i++) {
+				arrayColliding[i].obj.destroy();
+			}
+			Crafty.trigger("GrowScore", CONSTANTS.POWERUP_SCORE);
+			this.shootType = SHOOT_TYPE.DOUBLE;
 		});
 
 	}
