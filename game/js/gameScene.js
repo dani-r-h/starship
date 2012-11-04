@@ -99,22 +99,49 @@ Crafty.scene("GameScene", function() {
 		Crafty("SmartEnemy").destroy();
 		Crafty("ShootEnemy").destroy();
 		Crafty("ShootSmartEnemy").destroy();
+		Crafty("PowerUpDoubleShoot").destroy();
 	});
 
 	Crafty.bind("PlaySound", function(soundName) {
-		Crafty.audio.play(soundName, 1, 0.3);
+		if (DEBUG.DEBUG_FLAG == false || DEBUG.DEBUG_FLAG == true
+				&& DEBUG.VOLUME == true) {
+			Crafty.audio.play(soundName, 1, 0.3);
+		}
 	});
 
 	Crafty.bind("SwitchOnSounds", function() {
-		SOUNDS.active = true;
-		interfaz.soundsOnOff.text("On");
-		SOUNDS.obj = Crafty.audio.play("ambiente", -1, 0.8);
+		if (DEBUG.DEBUG_FLAG == false || DEBUG.DEBUG_FLAG == true
+				&& DEBUG.VOLUME == true) {
+			SOUNDS.active = true;
+			interfaz.soundsOnOff.text("On");
+			SOUNDS.obj = Crafty.audio.play("ambiente", -1, 0.8);
+		}
 	});
 
 	Crafty.bind("SwitchOffSounds", function() {
-		SOUNDS.active = false;
-		interfaz.soundsOnOff.text("Off");
-		Crafty.audio.stop();
+		if (DEBUG.DEBUG_FLAG == false || DEBUG.DEBUG_FLAG == true
+				&& DEBUG.VOLUME == true) {
+			SOUNDS.active = false;
+			interfaz.soundsOnOff.text("Off");
+			Crafty.audio.stop();
+		}
+	});
+
+	Crafty.bind("PlayerShoot", function(data) {
+		var shootType = data.shootType;
+		var coordX = data.coordX;
+		var width = data.width;
+		var coordY = data.coordY;
+
+		if (shootType == SHOOT_TYPE.SIMPLE) {
+			Crafty.e("Shoot").shoot((coordX + width / 2), coordY, 8,
+					DIRECTIONS.GO_UP, COLOURS.RED);
+		} else if (shootType == SHOOT_TYPE.DOUBLE) {
+			Crafty.e("Shoot").shoot((coordX + width / 2) + 3, coordY, 8,
+					DIRECTIONS.GO_UP, COLOURS.RED);
+			Crafty.e("Shoot").shoot((coordX + width / 2) - 10, coordY, 8,
+					DIRECTIONS.GO_UP, COLOURS.RED);
+		}
 
 	});
 

@@ -31,6 +31,10 @@ Crafty.c("GameLoop", {
 				Crafty.e("SmartEnemy");
 			}
 
+			if (launchPowerUp("PowerUpDoubleShoot")) {
+				Crafty.e("PowerUpDoubleShoot");
+			}
+
 		});
 
 		this.bind('KeyDown', function() {

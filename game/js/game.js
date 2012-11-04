@@ -32,9 +32,18 @@ var CONSTANTS = {
 	MAX_SMART_ENEMIES : 3,
 
 	SMART_ENEMY_SPEED : 0.25,
-	ENEMY_SPEED : 1.5
+	ENEMY_SPEED : 1.5,
+
+	POWERUP_SPEED : 2,
+	TIMER_POWERUPS : 500,
+	POWERUP_SCORE : 100
 
 };
+
+var SHOOT_TYPE = {
+	SIMPLE : 'simple',
+	DOUBLE : 'double'
+}
 
 var GAME_STATUS = {
 	GAME_OVER : false,
@@ -51,7 +60,8 @@ var COLOURS = {
 	BLUE : '#0000ff',
 	BLACK : '#000000',
 	MIDNIGHT_BLUE : '#000033',
-	VIOLET : '#4F2F4F'
+	VIOLET : '#4F2F4F',
+	PINK : '#DF199A'
 };
 
 var interfaz = {
@@ -68,6 +78,7 @@ var DEBUG = {
 	DEBUG_LAUNCH_SMART_ENEMIES : true,
 	DEBUG_SHOOT_ENEMIES : true,
 	DEBUG_SHOOT_SMART_ENEMIES : true,
+	DEBUG_VOLUME : false,
 	MAX_ENEMIES_DEBUG : 0,
 	MAX_SMART_ENEMIES_DEBUG : 0,
 	debugDiv : null,
@@ -81,6 +92,26 @@ var PLAYER_SHIP = {
 var SOUNDS = {
 	active : false,
 	obj : null
+}
+
+function hasTargetReached(coord, coordTarget, newCoord) {
+	var hasReached = false;
+
+	if ((coord < coordTarget && newCoord > coordTarget)
+			|| (coord > coordTarget && newCoord < coordTarget)) {
+		hasReached = true;
+	}
+	return hasReached;
+}
+
+function selectBetweenNumber(a, b) {
+	var prob = Crafty.math.randomInt(0, 99);
+	var div = prob / 50;
+	if (div >= 0 && div < 1) {
+		return a;
+	} else if (div >= 1) {
+		return b;
+	}
 }
 
 function mustShootEnemy(frame) {
@@ -109,6 +140,21 @@ function mustShootSmartEnemy(frame, shootX, shootY, playerX, playerY) {
 
 	}
 	return shoot;
+}
+
+function launchPowerUp(namePowerup) {
+	var count = Crafty(namePowerup).length;
+	var launch = false;
+	if (DEBUG.DEBUG_FLAG == false) {
+		if (count == 0 && Crafty.math.randomInt(0, 500) == 250) {
+			launch = true;
+		}
+	} else if (DEBUG.DEBUG_FLAG == true) {
+		if (count == 0) {
+			launch = true;
+		}
+	}
+	return launch;
 }
 
 function launchEnemy(frame, numEnemy) {
